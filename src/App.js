@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Navigate, Routes } from "react-router";
+import { BrowserRouter,Route } from "react-router-dom";
+import AddUser from "./components/AddUser";
+import AllUsers from "./components/AllUsers";
+import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
+import UpdateUser from "./components/Update";
+import Update from "./components/Update";
+// To handle invalid routing by user
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter> 
+      <Navbar/>
+      <Routes>
+      {/* <Route exact path="/" element={<CodeForInterview/>}/> */}
+      <Route exact path="/all" element={<AllUsers/>}/>
+      <Route exact path="/add" element={<AddUser/>}/>
+      <Route path="/404" element={<NotFound/>}/>
+      <Route path="/update/:id" element={<UpdateUser/>}/>
+      <Route path="*" element={<Navigate replace to="/404" />} />
+      
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
 export default App;
+// npm run json-server
+// concurrently -we can use 2 commands at a time in terminal
+// to start the server write npm run dev because we used the concurrent to store the data
+// Instead of one server is off and another is on with the help of it we can use it to run both commands
